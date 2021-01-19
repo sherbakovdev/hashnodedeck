@@ -1,34 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# How
 
-## Getting Started
+1. I installed a stack based on my article about about Nextjs and TS and then remove everything to start from a clear Slate.
 
-First, run the development server:
+2. Face with issue how should I query GraphQL api? Especially if I want to do some kind of subscription. setInterval should do that trick but what about GraphQL client? I've never work with Nextjs and GraphQL in one stack before. I heard good comments about React Query when working with graphql instead of apollo client. Installing React query. Planning to go through the tutorial on youtube.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+3. Decided to go with React Query. Installed it and all other dependencies: graphql, graphql-request, graphql-tag and devtools
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. Decided to create queries first and then a hook for fetching data
+5. Add env variables to store API variable and add to .gitignore
+6. Okay, how to refetch it with react query? invalidateQueries in interval
+7. Before Pagination we need to implement at least one column. Problem with 100% height :(
+8. Pagination
