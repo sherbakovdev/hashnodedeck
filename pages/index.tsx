@@ -143,30 +143,15 @@ function Feed(props) {
 export default function Home() {
   const queryClient = useQueryClient();
 
-  // React.useEffect(() => {
-  //   const interval = 60 * 1000;
-  //   setInterval(() => {
-  //     queryClient.invalidateQueries();
-  //   }, interval);
-  //   queryClient.invalidateQueries();
-  // }, []);
+  React.useEffect(() => {
+    const interval = 30 * 1000;
+    setInterval(() => {
+      queryClient.invalidateQueries();
+    }, interval);
+    queryClient.invalidateQueries();
+  }, []);
 
   const ref = React.useRef();
-
-  React.useEffect(() => {
-    if (ref.current) {
-      const handleScroll = throttle((event) => {
-        const el = event.target;
-
-        if (el.scrollHeight - el.scrollTop - el.clientHeight < 700) {
-          fetchNextPage();
-        }
-      }, 1000);
-
-      ref.current!.addEventListener('scroll', handleScroll);
-      return () => ref.current!.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
 
   // const { data, isLoading } = useGQLQuery('new', GET_STORIES_FEED, { type: FeedType.NEW, page: 0 });
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useInfiniteGQLQuery(
@@ -179,6 +164,43 @@ export default function Home() {
       },
     }
   );
+
+  React.useEffect(() => {
+    if (data?.pages.length === 1) {
+      fetchNextPage();
+    }
+  }, [data?.pages]);
+
+  React.useEffect(() => {
+    // const isScrollable = function (ele) {
+    //   // https://htmldom.dev/check-if-an-element-is-scrollable/
+    //   // Compare the height to see if the element has scrollable content
+    //   const hasScrollableContent = ele.scrollHeight > ele.clientHeight;
+
+    //   // It's not enough because the element's `overflow-y` style can be set as
+    //   // * `hidden`
+    //   // * `hidden !important`
+    //   // In those cases, the scrollbar isn't shown
+    //   const overflowYStyle = window.getComputedStyle(ele).overflowY;
+    //   const isOverflowHidden = overflowYStyle.indexOf('hidden') !== -1;
+
+    //   return hasScrollableContent && !isOverflowHidden;
+    // };
+
+    if (ref.current) {
+      // console.log(isScrollable(ref.current));
+      const handleScroll = throttle((event) => {
+        const el = event.target;
+
+        if (el.scrollHeight - el.scrollTop - el.clientHeight < 300) {
+          fetchNextPage();
+        }
+      }, 1000);
+
+      ref.current!.addEventListener('scroll', handleScroll);
+      return () => ref.current.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
 
   return (
     <>
@@ -193,8 +215,9 @@ export default function Home() {
         </div>
         <div ref={ref} className='w-96 h-full bg-gray-800 overflow-scroll p-4'>
           {isLoading ? 'Loading' : data.pages.map((page: any) => <Feed feed={page.storiesFeed} />)}
-          {isFetchingNextPage ? (
-            <div className='text-center text-gray-600 my-4'>Loading more...</div>
+
+          {data?.pages ? (
+            <div className='text-center text-gray-600 mb-4'>Loading more...</div>
           ) : null}
         </div>
       </div>

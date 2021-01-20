@@ -17,3 +17,5 @@
    We need to use useInfiniteQuery as we want to implement infinite scroll.
    I will add a page argument and then will create a different hook.
    It was quite a problem to understand how useInfiniteQuery work but I managed but started with loading more button first
+
+^commit Implement infinite scroll
