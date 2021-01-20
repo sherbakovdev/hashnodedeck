@@ -9,5 +9,11 @@
 4. Decided to create queries first and then a hook for fetching data
 5. Add env variables to store API variable and add to .gitignore
 6. Okay, how to refetch it with react query? invalidateQueries in interval
-7. Before Pagination we need to implement at least one column. Problem with 100% height :(
+7. Before Pagination we need to implement at least one column and mb a sidebar. Problem with 100% height :( Image, image optimization from different source and how to implement loading indicator
+
+^commit Feed Draft
+
 8. Pagination
+   We need to use useInfiniteQuery as we want to implement infinite scroll.
+   I will add a page argument and then will create a different hook.
+   It was quite a problem to understand how useInfiniteQuery work but I managed but started with loading more button first

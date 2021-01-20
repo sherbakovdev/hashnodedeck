@@ -10,5 +10,6 @@ html,
 body,
 #__next {
   height: 100%;
+  overflow: hidden;
   @apply bg-gray-900;
 }
