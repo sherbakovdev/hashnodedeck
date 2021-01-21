@@ -19,3 +19,23 @@
    It was quite a problem to understand how useInfiniteQuery work but I managed but started with loading more button first
 
 ^commit Implement infinite scroll
+
+Okay but what if the screen is large? The easiest solution for now prerender first 2 pages on the initial renderer. Then I need to test it on 4K monitor
+
+^commit Prefetch second page
+
+FIXME:
+
+- sometimes broken url for posts
+  Must Read Developer Articles on Hashnode - #26
+  can I fetch post by id?
+
+- lag when scroll is on the bottom. req several pages
+
+TODO:
+
+- add reactions and comments bubbles
+
+- add favicon
+
+- clean the code
