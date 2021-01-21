@@ -36,6 +36,4 @@ TODO:
 
 - add reactions and comments bubbles
 
-- add favicon
-
 - clean the code
