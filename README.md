@@ -11,18 +11,14 @@
 6. Okay, how to refetch it with react query? invalidateQueries in interval
 7. Before Pagination we need to implement at least one column and mb a sidebar. Problem with 100% height :( Image, image optimization from different source and how to implement loading indicator
 
-^commit Feed Draft
-
 8. Pagination
    We need to use useInfiniteQuery as we want to implement infinite scroll.
    I will add a page argument and then will create a different hook.
    It was quite a problem to understand how useInfiniteQuery work but I managed but started with loading more button first
 
-^commit Implement infinite scroll
-
 Okay but what if the screen is large? The easiest solution for now prerender first 2 pages on the initial renderer. Then I need to test it on 4K monitor
 
-^commit Prefetch second page
+I got a comment to increate the size for columns for the full screen. and then stretch. Needs to investigate.
 
 FIXME:
 
@@ -37,3 +33,5 @@ TODO:
 - add reactions and comments bubbles
 
 - clean the code
+
+- on mobile - Tags stay static. Need to scroll horizontally

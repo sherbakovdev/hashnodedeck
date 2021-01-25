@@ -11,11 +11,19 @@ const GET_STORIES_FEED = gql`
       cuid
       title
       dateAdded
+      partOfPublication
+
+      # publication {
+      #   domain
+      #   username
+      #   subdomain
+      # }
 
       author {
-        blogHandle
-        username
         photo
+        username
+        blogHandle
+        publicationDomain
       }
 
       totalReactions

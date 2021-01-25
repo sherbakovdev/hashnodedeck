@@ -1,6 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
+import tw from 'twin.macro';
 
+import Banner from '../components/Banner';
+import Logo from '../components/Logo';
 import Story from '../components/Story';
 import { useFeedQuery } from '../hooks/useFeedQuery';
 
@@ -17,55 +19,45 @@ export default function Home() {
         <title>Hashnode Deck</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      <Banner />
+      <Page>
+        <Sidebar>
+          <Logo />
+        </Sidebar>
 
-      <div className='bg-blue-600 text-white text-sm text-center p-1'>
-        HashnodeDeck has no official affiliation with{' '}
-        <a className='hover:underline' target='_blank' href='https://hashnode.com/'>
-          Hashnode
-        </a>
-        . Made with ♥ by{' '}
-        <a
-          className='underline hover:no-underline'
-          target='_blank'
-          href='https://twitter.com/sherbakovdev'
-        >
-          @sherbakovdev
-        </a>{' '}
-        for the community.
-      </div>
-      <div className='flex h-full overflow-x-auto'>
-        <div className='w-16 h-full bg-gray-800 flex flex-col p-4  flex-shrink-0'>
-          <div>
-            <Image src='/logo.png' alt='Hashnode logo' width='50' height='50' />
-          </div>
-          <div className='text-blue-600 cursor-default text-sm'>Deck</div>
-        </div>
         {feeds.map((feed) => {
+          const stories = feed.data ? feed.data.pages.map((feed) => feed.storiesFeed).flat() : null;
           return (
-            <div
-              ref={feed.ref}
-              className='w-96 h-full bg-gray-800 overflow-scroll ml-3 flex-shrink-0'
-            >
-              <div className='capitalize font-bold text-gray-500 p-4 fixed bg-gray-800 z-50 w-96 border-solid border-gray-900 border-b'>
-                {feed.type}
-              </div>
-              {feed.isLoading ? (
-                <div className='text-center text-gray-600 mt-24'>Loading</div>
-              ) : (
-                <div className='mt-14'>
-                  {feed.data?.pages.map((feed) =>
-                    feed.storiesFeed.map((story) => <Story key={story.cuid} {...story} />)
-                  )}
-                </div>
-              )}
-
-              {feed.data?.pages ? (
-                <div className='text-center text-gray-600 my-4'>Loading more...</div>
-              ) : null}
-            </div>
+            <FeedContainer>
+              <FeedHeader>{feed.type}</FeedHeader>
+              <Feed ref={feed.ref} key={feed.type}>
+                <FeedLoading on={feed.isLoading} />
+                <FeedStories stories={stories} />
+              </Feed>
+            </FeedContainer>
           );
         })}
-      </div>
+      </Page>
     </>
   );
 }
+
+const Page = tw.div`flex h-screen overflow-x-auto overflow-y-hidden`;
+const Sidebar = tw.div`w-16 h-full bg-gray-800 flex flex-col p-4 flex-shrink-0`;
+
+const FeedContainer = tw.div`pb-20`;
+const Feed = tw.div`w-96 h-full	bg-gray-800 overflow-scroll ml-3 flex-shrink-0 relative`;
+const FeedHeader = tw.div`ml-3 capitalize font-bold text-gray-500 p-4 bg-gray-800 w-96 border-solid border-gray-900 border-b`;
+const FeedStories = ({ stories }: { stories: App.Story[] | null }) => {
+  return stories ? (
+    <>
+      {stories.map((story) => (
+        <Story key={story.cuid} {...story} />
+      ))}
+      <FeedLoading on={true} />
+    </>
+  ) : null;
+};
+
+const FeedLoading = ({ on }: { on: boolean }) =>
+  on ? <div tw='text-center text-gray-600 my-6'>Loading</div> : null;

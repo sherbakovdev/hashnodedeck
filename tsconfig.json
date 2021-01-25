@@ -21,9 +21,10 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx", "babel-plugin-macros.config.js"
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "files": ["twin.d.ts"],
 }
