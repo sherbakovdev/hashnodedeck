@@ -13,12 +13,6 @@ const GET_STORIES_FEED = gql`
       dateAdded
       partOfPublication
 
-      # publication {
-      #   domain
-      #   username
-      #   subdomain
-      # }
-
       author {
         photo
         username
@@ -26,14 +20,19 @@ const GET_STORIES_FEED = gql`
         publicationDomain
       }
 
-      totalReactions
-      responseCount
       coverImage
+      replyCount
+      responseCount
+      totalReactions
     }
   }
 `;
 
-export const useFeedQuery = (type: App.FeedType) => {
+interface Parameters {
+  title?: string;
+}
+
+export const useFeedQuery = (type: App.FeedType, parameters?: Parameters) => {
   const elRef = React.useRef<HTMLDivElement>(null);
 
   const fetcher = (params: App.FetcherParams) => {
@@ -71,5 +70,7 @@ export const useFeedQuery = (type: App.FeedType) => {
     return () => el.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return { ...query, ref: elRef, type };
+  const title = parameters ? parameters.title : type;
+
+  return { ...query, ref: elRef, type, title };
 };

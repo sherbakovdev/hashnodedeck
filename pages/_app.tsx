@@ -48,8 +48,9 @@ declare global {
         publicationDomain: string | null;
       };
 
-      totalReactions: number;
+      replyCount: number;
       responseCount: number;
+      totalReactions: number;
       coverImage: string | null;
     }
 

@@ -4,7 +4,8 @@ import tw from 'twin.macro';
 const Banner = () => {
   const [hidden, setHidden] = React.useState(false);
 
-  const onHide = React.useCallback(() => {
+  const onHide = React.useCallback((e) => {
+    e.stopPropagation();
     setHidden(true);
   }, []);
 
@@ -21,7 +22,7 @@ const Banner = () => {
   );
 };
 
-const Container = tw.div`bg-blue-600 text-white text-sm text-center p-1 w-full`;
+const Container = tw.div`bg-blue-800 opacity-95 text-white text-sm text-center p-1 w-full absolute bottom-0 z-10`;
 const Link = tw.a`underline hover:no-underline cursor-pointer`;
 
 export default Banner;
