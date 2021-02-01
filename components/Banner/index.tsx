@@ -6,6 +6,7 @@ const Banner = () => {
 
   const onHide = React.useCallback((e) => {
     e.stopPropagation();
+
     setHidden(true);
   }, []);
 
@@ -14,7 +15,7 @@ const Banner = () => {
   return (
     <Container onTouchEnd={onHide}>
       Hashnode Deck has no official affiliation with Hashnode. Made by{' '}
-      <Link target='_blank' href='https://twitter.com/sherbakovdev'>
+      <Link target='_blank' rel='noopener noreferrer' href='https://twitter.com/sherbakovdev'>
         @sherbakovdev
       </Link>{' '}
       for the community. <Link onClick={onHide}>Hide</Link>

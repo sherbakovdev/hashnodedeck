@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['cdn.hashnode.com'],
+    domains: ['cdn.hashnode.com', 'hashnode.imgix.net'],
   },
   webpack: (config, { isServer }) => {
     // Fixes packages that depend on fs/module module

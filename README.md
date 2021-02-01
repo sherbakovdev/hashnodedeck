@@ -18,20 +18,4 @@
 
 Okay but what if the screen is large? The easiest solution for now prerender first 2 pages on the initial renderer. Then I need to test it on 4K monitor
 
-I got a comment to increate the size for columns for the full screen. and then stretch. Needs to investigate.
-
-FIXME:
-
-- sometimes broken url for posts
-  Must Read Developer Articles on Hashnode - #26
-  can I fetch post by id?
-
-- lag when scroll is on the bottom. req several pages
-
-TODO:
-
-- add reactions and comments bubbles
-
-- clean the code
-
-- on mobile - Tags stay static. Need to scroll horizontally
+I got a comment to increase the size for columns for the full screen. and then stretch. Needs to investigate.

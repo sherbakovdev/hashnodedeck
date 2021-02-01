@@ -13,3 +13,7 @@ body,
   overflow: hidden;
   @apply bg-gray-900;
 }
+
+a:hover {
+  text-decoration: underline;
+}

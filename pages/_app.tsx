@@ -7,8 +7,13 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 import GlobalStyles from '../globalStyles';
 
-if (!process.env.NEXT_PUBLIC_API_URL) {
-  throw Error('No NEXT_PUBLIC_API_URL defined in .env');
+const hasAllGlobalVariables =
+  process.env.NEXT_PUBLIC_API_URL &&
+  process.env.NEXT_PUBLIC_PROD_HOST &&
+  process.env.NEXT_PUBLIC_DEV_HOST;
+
+if (!hasAllGlobalVariables) {
+  throw Error('Not all the global variables are defined. Check .env');
 }
 
 const queryClient = new QueryClient();
@@ -55,6 +60,10 @@ declare global {
     }
 
     type FeedType = 'NEW' | 'BEST' | 'FEATURED' | 'COMMUNITY';
+
+    interface FeedParams {
+      title?: string;
+    }
 
     interface FetcherParams {
       pageParam?: number;
